@@ -54,7 +54,7 @@ def extractTextFromAllPapers(foldername):
 		if file == ".DS_Store":
 			continue
 		path = directory_path + "/" + file
-		contents = extractTextFromPaper(file)
+		contents = extractTextFromPaper(path)
 		country_papers[file] = contents
 	return country_papers
 
