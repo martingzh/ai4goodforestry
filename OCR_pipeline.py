@@ -47,10 +47,13 @@ def extractTextFromAllPapers(foldername):
 	directory_path = pretext + foldername
 	# Retrieve file names inside folder
 	files = os.listdir(directory_path)
-	print("File now open.")
+	print("Folder now open.")
 	# Create a dictionary where we map files names to OCR extracted text
 	country_papers = {}
 	for file in files:
+		if file == ".DS_Store":
+			continue
+		path = directory_path + "/" + file
 		contents = extractTextFromPaper(file)
 		country_papers[file] = contents
 	return country_papers
