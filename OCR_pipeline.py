@@ -77,7 +77,7 @@ def extractMetaData(extractedText):
         print(i)
     for i in range(1, len(final_text)):
         datePages = datefinder.find_dates(final_text[i])
-        date.append(datePages)
+        dates.append(datePages)
 ##title
     result = final_text[0].split("\n")
     titleCandidates = []
@@ -100,5 +100,5 @@ def extractMetaData(extractedText):
             country.add(places.countries)
 #             print (places.cities)            
             
-    return (date, titleCandidates, list(country))
+    return (dates, titleCandidates, list(country))
 
