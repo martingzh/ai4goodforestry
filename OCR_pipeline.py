@@ -68,15 +68,16 @@ def extractTextFromAllPapers(foldername):
 # Arguments: filename is the file name of the relevant policy paper
 
 def extractMetaData(extractedText):
-#dates
+##dates
     final_text = extractedText
     datePage0 = datefinder.find_dates(final_text[0], index=True, strict=False, base_date=None)
+    dates = []
     print("On page 0: ")
     for i in datePage0:
         print(i)
     for i in range(1, len(final_text)):
         datePages = datefinder.find_dates(final_text[i])
-        
+        date.append(datePages)
 ##title
     result = final_text[0].split("\n")
     titleCandidates = []
@@ -93,11 +94,11 @@ def extractMetaData(extractedText):
     print(newtextsplit)
     for i in newtextsplit:
         target = i.capitalize()
-        country = []
+        country = set()
         places = GeoText(target)
-        if len(places.countries) > 0 or len(places.cities) > 0:
-            countries.append(places.countries)
+        if len(places.countries) > 0:
+            country.add(places.countries)
 #             print (places.cities)            
             
-    return (datePages, titleCandidates, country)
+    return (date, titleCandidates, list(country))
 
