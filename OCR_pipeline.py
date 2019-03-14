@@ -22,23 +22,25 @@ from geotext import GeoText
 # Note: This might take a while to run.
 
 def extractTextFromPaper(filename):
-	# Convert a PDF into a form that we can utilize the wand library
-	image_pdf = Image(filename=filename, resolution=300)
-	# Convert this to JPEG so that we can extract information that we can feed into pytesseract
-	image_jpeg = image_pdf.convert('jpeg')
-	image = []
-	final_text = []
-	# Convert the images on each page to blobs (binary strings)
-	for img in image_jpeg.sequence:
-	    img_page = Image(image=img)
-	    image.append(img_page.make_blob('jpeg'))
-	print("Images converted to binary strings")
-	# Extract text
-	for img in image:
-	    text = pytesseract.image_to_string(PIL.Image.open(io.BytesIO(img)))
-	    final_text.append(text)
-	print("Paper successfully converted!")
-	return final_text
+    # Convert a PDF into a form that we can utilize the wand library
+    image_pdf = Image(filename=filename, resolution=300)
+    # Convert this to JPEG so that we can extract information that we can feed into pytesseract
+    image_jpeg = image_pdf.convert('jpeg')
+    image = []
+    final_text = []
+    # Convert the images on each page to blobs (binary strings)
+    for img in image_jpeg.sequence:
+        img_page = Image(image=img)
+        image.append(img_page.make_blob('jpeg'))
+    print("Images converted to binary strings")
+    # Extract text
+    for img in image:
+        text = pytesseract.image_to_string(PIL.Image.open(io.BytesIO(img)))
+        final_text.append(text)
+    print("Paper successfully converted!")
+    
+    metadata = extractMetaData(final_text)
+    return (final_text, metadata)
 
 # A method that extracts all the text from a specific folder in sample data. 
 # Argument: Folder that you want to extract text from
@@ -47,20 +49,20 @@ def extractTextFromPaper(filename):
 # Note: This might take a while to run.
 
 def extractTextFromAllPapers(foldername):
-	pretext = "sample data/"
-	directory_path = pretext + foldername
-	# Retrieve file names inside folder
-	files = os.listdir(directory_path)
-	print("Folder now open.")
-	# Create a dictionary where we map files names to OCR extracted text
-	country_papers = {}
-	for file in files:
-		if file == ".DS_Store":
-			continue
-		path = directory_path + "/" + file
-		contents = extractTextFromPaper(path)
-		country_papers[file] = contents
-	return country_papers
+    pretext = "sample data/"
+    directory_path = pretext + foldername
+    # Retrieve file names inside folder
+    files = os.listdir(directory_path)
+    print("Folder now open.")
+    # Create a dictionary where we map files names to OCR extracted text
+    country_papers = {}
+    for file in files:
+        if file == ".DS_Store":
+            continue
+        path = directory_path + "/" + file
+        contents = extractTextFromPaper(path)
+        country_papers[file] = contents
+        return country_papers
 
 # A method to extract metadata from a specific policy paper. 
 # Arguments: filename is the file name of the relevant policy paper
@@ -91,10 +93,11 @@ def extractMetaData(extractedText):
     print(newtextsplit)
     for i in newtextsplit:
         target = i.capitalize()
+        country = []
         places = GeoText(target)
         if len(places.countries) > 0 or len(places.cities) > 0:
-            print (places.countries)
-            print (places.cities)            
+            countries.append(places.countries)
+#             print (places.cities)            
             
-	return (datePages, titleCandidates, places)
+    return (datePages, titleCandidates, country)
 
