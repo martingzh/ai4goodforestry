@@ -10,6 +10,10 @@ import cv2
 import os
 import numpy as np
 import io
+import datefinder
+import re
+from geotext import GeoText
+
 
 # A method that extracts text from the PDF. Please supply relative path of PDF
 # Argument: filename relative path (i.e. "sample data/Kenya/AgricultureFisheriesandFoodAuthorityNo13of2013.PDF")
@@ -61,7 +65,36 @@ def extractTextFromAllPapers(foldername):
 # A method to extract metadata from a specific policy paper. 
 # Arguments: filename is the file name of the relevant policy paper
 
-def extractMetaData(filename, extractedText):
-
-	return
+def extractMetaData(extractedText):
+#dates
+    final_text = extractedText
+    datePage0 = datefinder.find_dates(final_text[0], index=True, strict=False, base_date=None)
+    print("On page 0: ")
+    for i in datePage0:
+        print(i)
+    for i in range(1, len(final_text)):
+        datePages = datefinder.find_dates(final_text[i])
+        
+##title
+    result = final_text[0].split("\n")
+    titleCandidates = []
+    for i in result: 
+        line = i.split(" ")
+        if ((line[0] == 'The') or ('Act' in line) and (re.match(r"(?<!\d)\d{4,4}(?!\d)", line[-1]))):
+            print(line, (line[0] == "The"), ('Act' in line), (re.match(r"(?<!\d)\d{4,4}(?!\d)", line[-1])))
+            titleCandidates.append(i)
+            
+##places           
+    text = final_text[0]
+    newtext = text.replace("\n", " ")
+    newtextsplit = newtext.split()
+    print(newtextsplit)
+    for i in newtextsplit:
+        target = i.capitalize()
+        places = GeoText(target)
+        if len(places.countries) > 0 or len(places.cities) > 0:
+            print (places.countries)
+            print (places.cities)            
+            
+	return (datePages, titleCandidates, places)
 
