@@ -1,0 +1,48 @@
+#A library for extracting topic models from text files. To extract text, use methods from OCR_pipeline.py
+
+import gensim
+import gensim.corpora as corpora
+from gensim.utils import simple_preprocess
+from gensim.models import CoherenceModel
+
+#def make_bigrams(texts):
+ #   return [bigram_mod[doc] for doc in texts]
+
+#def make_trigrams(texts):
+#    return [trigram_mod[bigram_mod[doc]] for doc in texts]
+
+def lemmatization(nlp, texts, allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV']):
+    """https://spacy.io/api/annotation"""
+    texts_out = []
+    for sent in texts:
+        doc = nlp(" ".join(sent)) 
+        texts_out.append([token.lemma_ for token in doc if token.pos_ in allowed_postags])
+    return texts_out
+
+def sent_to_words(sentences):
+    for sentence in sentences:
+        yield(gensim.utils.simple_preprocess(str(sentence), deacc=False)
+
+def toSentences(pageList):
+    
+    # convert into long string (from list of page texts)
+    longString = ''.join(pageList).replace('\n',' ')
+    # split into list of sentences
+    sentences = nltk.sent_tokenize(longString)
+        
+    # Remove Stop Words
+    # sentences_nostops = remove_stopwords(sentences)
+    
+    # Convert sentences to list of words
+    data_words = list(sent_to_words(sentences))
+    
+    # Form Bigrams
+    #sentences_bigrams = make_bigrams(data_words)
+    sentences_bigrams = data_words
+
+    # Initialize spacy 'en' model, keeping only tagger component (for efficiency)
+    # python3 -m spacy download en
+    nlp = spacy.load('en', disable=['parser', 'ner'])
+    sentences_lemmatized = lemmatization(nlp, sentences_bigrams, allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV'])
+    
+    return sentences_lemmatized
