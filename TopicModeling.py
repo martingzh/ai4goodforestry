@@ -1,9 +1,12 @@
 #A library for extracting topic models from text files. To extract text, use methods from OCR_pipeline.py
 
 import gensim
+import nltk
+import spacy
 import gensim.corpora as corpora
 from gensim.utils import simple_preprocess
 from gensim.models import CoherenceModel
+nltk.download('punkt')
 
 #def make_bigrams(texts):
  #   return [bigram_mod[doc] for doc in texts]
@@ -23,7 +26,7 @@ def sent_to_words(sentences):
     for sentence in sentences:
         yield(gensim.utils.simple_preprocess(str(sentence), deacc=False)
 
-def toSentences(pageList):
+ def toSentences(pageList):
     
     # convert into long string (from list of page texts)
     longString = ''.join(pageList).replace('\n',' ')
@@ -46,3 +49,23 @@ def toSentences(pageList):
     sentences_lemmatized = lemmatization(nlp, sentences_bigrams, allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV'])
     
     return sentences_lemmatized
+
+#runs LDA on lemmatized text and returns corpus and LDA model
+def LDA(lemmatized_sents):
+    #create dictionary
+    id2word = corpora.Dictionary(lemmatized_sents)
+    
+    # Creates corpus
+    corpus = [id2word.doc2bow(lemmatized_sents) for lemmatized_sents in lemmatized_sents]
+    
+    lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus,
+                                           id2word=id2word,
+                                           num_topics=30, 
+                                           random_state=100,
+                                           update_every=3,
+                                           chunksize=1,
+                                           passes=30,
+                                           alpha='auto',
+                                           per_word_topics=True)
+    
+    return [corpus, lda_model]
