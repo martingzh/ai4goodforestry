@@ -40,6 +40,7 @@ def extractTextFromPaper(filename):
     print("Paper successfully converted!")
     
     metadata = extractMetaData(final_text)
+    print("Metadata extracted!")
     return (final_text, metadata)
 
 # A method that extracts all the text from a specific folder in sample data. 
@@ -92,12 +93,13 @@ def extractMetaData(extractedText):
     newtext = text.replace("\n", " ")
     newtextsplit = newtext.split()
     print(newtextsplit)
+    country = set()
     for i in newtextsplit:
         target = i.capitalize()
-        country = set()
         places = GeoText(target)
         if len(places.countries) > 0:
-            country.add(places.countries)
+            # country.add(tuple(places.countries))
+            country.update(places.countries)
 #             print (places.cities)            
             
     return (dates, titleCandidates, list(country))

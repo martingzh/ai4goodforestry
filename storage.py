@@ -32,7 +32,7 @@ class PolicyPaper(object):
 
 def serializeObject(paper):
 	json_object = jsonpickle.encode(paper)
-	paper_name = "object storage/" + paper.title + ".txt"
+	paper_name = "object storage/" + paper.title[0] + ".txt"
 	try:
 		print(json_object,  file=open(paper_name, 'w'))
 		return True
