@@ -9,6 +9,7 @@ class PolicyPaper(object):
 	title = []
 	extractedText = []
 	paperType = ""
+	filename = ""
 
 	# filename for now should be the relative path of the file
 	def __init__ (self, filename):
@@ -20,6 +21,8 @@ class PolicyPaper(object):
 		self.extractedText = et
 		# Currently paper type is a placeholder
 		self.paperType = "policy"
+		self.filename = filename
+        
 
 
 # def summary():
@@ -30,9 +33,8 @@ class PolicyPaper(object):
 # Return Value: True if stored, False otherwise.
 # Stores files 
 
-def serializeObject(paper):
+def serializeObject(paper, paper_name):
 	json_object = jsonpickle.encode(paper)
-	paper_name = "object storage/" + paper.title[0] + ".txt"
 	try:
 		print(json_object,  file=open(paper_name, 'w'))
 		return True
