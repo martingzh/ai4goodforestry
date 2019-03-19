@@ -24,10 +24,9 @@ def lemmatization(nlp, texts, allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV']):
 
 def sent_to_words(sentences):
     for sentence in sentences:
-        yield(gensim.utils.simple_preprocess(str(sentence), deacc=False)
-
- def toSentences(pageList):
-    
+        yield(gensim.utils.simple_preprocess(str(sentence), deacc=False)) 
+              
+def toSentences(pageList):    
     # convert into long string (from list of page texts)
     longString = ''.join(pageList).replace('\n',' ')
     # split into list of sentences
