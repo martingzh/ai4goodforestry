@@ -10,6 +10,9 @@ class PolicyPaper(object):
 	extractedText = []
 	paperType = ""
 	filename = ""
+    cleanedText = ""
+    LDA = None
+    corpus = None
 
 	# filename for now should be the relative path of the file
 	def __init__ (self, filename):
