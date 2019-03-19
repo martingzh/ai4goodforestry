@@ -55,14 +55,13 @@ def LDA(lemmatized_sents):
     id2word = corpora.Dictionary(lemmatized_sents)
     
     # Creates corpus
-    corpus = [id2word.doc2bow(lemmatized_sents) for lemmatized_sents in lemmatized_sents]
+    corpus = [id2word.doc2bow(lemmatized_sent) for lemmatized_sent in lemmatized_sents]
     
     lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus,
                                            id2word=id2word,
                                            num_topics=30, 
                                            random_state=100,
                                            update_every=3,
-                                           chunksize=1,
                                            passes=30,
                                            alpha='auto',
                                            per_word_topics=True)
