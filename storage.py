@@ -10,8 +10,7 @@ class PolicyPaper(object):
 	extractedText = []
 	paperType = ""
 	filename = ""
-	cleanedText = ""
-	LDA = None
+	cleanedText = None
 	corpus = None
 
 	# filename for now should be the relative path of the file
