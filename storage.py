@@ -11,6 +11,7 @@ class PolicyPaper(object):
 	paperType = ""
 	filename = ""
 	cleanedText = None
+	LDA = None
 	corpus = None
 
 	# filename for now should be the relative path of the file
