@@ -14,6 +14,14 @@ nltk.download('punkt')
 #def make_trigrams(texts):
 #    return [trigram_mod[bigram_mod[doc]] for doc in texts]
 
+
+#A method to lemmatize a list of texts
+#Arguments:
+#nlp: spacy model to be used
+#texts: list of texts to be lemmatized
+#allowed_postags: allowed parts of speech for lemmatized text
+#Returns: list of lemmatized texts 
+
 def lemmatization(nlp, texts, allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV']):
     """https://spacy.io/api/annotation"""
     texts_out = []
@@ -22,10 +30,22 @@ def lemmatization(nlp, texts, allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV']):
         texts_out.append([token.lemma_ for token in doc if token.pos_ in allowed_postags])
     return texts_out
 
+
+
+#A method to convert a list of sentences into a list of words
+#Arguments: the list of sentences to be processed
+#Returns: a list of words
+
 def sent_to_words(sentences):
     for sentence in sentences:
         yield(gensim.utils.simple_preprocess(str(sentence), deacc=False)) 
-              
+
+        
+        
+#A method to convert a list of pages into a list of sentences
+#Arguments: list of pages
+#Returns: list of lemmatized sentences
+
 def toSentences(pageList):    
     # convert into long string (from list of page texts)
     longString = ''.join(pageList).replace('\n',' ')
@@ -49,7 +69,12 @@ def toSentences(pageList):
     
     return sentences_lemmatized
 
-#runs LDA on lemmatized text and returns corpus and LDA model
+
+
+#A method that runs LDA on lemmatized text and returns corpus and LDA model
+#Arguments: list of lemmatized sents
+#Returns: list containing corpus and lda model
+
 def LDA(lemmatized_sents):
     #create dictionary
     id2word = corpora.Dictionary(lemmatized_sents)
