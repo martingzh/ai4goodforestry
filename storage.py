@@ -25,8 +25,6 @@ class PolicyPaper(object):
 		# Currently paper type is a placeholder
 		self.paperType = "policy"
 		self.filename = filename
-        
-
 
 # def summary():
 def getFileName(file_path):
@@ -36,11 +34,6 @@ def getFileName(file_path):
 		return file_name
 	return file_name[:dot_index]
 
-def getPaperName(title, file_path):
-	if len(title) == 0:
-		return getFileName(file_path)
-	return title[0]
-
 # A method that is used to convert Python Objects, i.e. PolicyPaper objects, to JSON files. 
 # Argument: PolicyPaper instnace
 # Return Value: True if stored, False otherwise.
@@ -48,12 +41,12 @@ def getPaperName(title, file_path):
 
 def serializeObject(paper):
 	json_object = jsonpickle.encode(paper)
-	paper_name = "object storage/" + getPaperName(paper.title, paper.filename) + ".txt"   
+	paper_name = "object storage/" + getFileName(paper.filename) + ".txt"   
 	try:
 		print(json_object,  file=open(paper_name, 'w'))
-		return True
+		return paper_name
 	except Exception as e:
-		return False
+		return None
 
 # A method that is used to deserialize JSON objects and convert them into Python objects. 
 # Argument: Filename (Relative Path)
