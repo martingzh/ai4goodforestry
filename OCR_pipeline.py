@@ -14,6 +14,10 @@ import datefinder
 import re
 from geotext import GeoText
 
+import time
+import textract
+
+
 
 # A method that extracts text from the PDF. Please supply relative path of PDF
 # Argument: filename relative path (i.e. "sample data/Kenya/AgricultureFisheriesandFoodAuthorityNo13of2013.PDF")
@@ -22,23 +26,10 @@ from geotext import GeoText
 # Note: This might take a while to run.
 
 def extractTextFromPaper(filename):
-    # Convert a PDF into a form that we can utilize the wand library
-    image_pdf = Image(filename=filename, resolution=300)
-    # Convert this to JPEG so that we can extract information that we can feed into pytesseract
-    image_jpeg = image_pdf.convert('jpeg')
-    image = []
     final_text = []
-    # Convert the images on each page to blobs (binary strings)
-    for img in image_jpeg.sequence:
-        img_page = Image(image=img)
-        image.append(img_page.make_blob('jpeg'))
-    print("Images converted to binary strings")
-    # Extract text
-    for img in image:
-        text = pytesseract.image_to_string(PIL.Image.open(io.BytesIO(img)))
-        final_text.append(text)
+    # Extract text of the entire document and store it into final_text
+    final_text = textract.process(filename).decode("utf-8") 
     print("Paper successfully converted!")
-    
     metadata = extractMetaData(final_text)
     print("Metadata extracted!")
     return (final_text, metadata)
@@ -71,7 +62,8 @@ def extractTextFromAllPapers(foldername):
 def extractMetaData(extractedText):
 ##dates
     final_text = extractedText
-    datePage0 = datefinder.find_dates(final_text[0], index=True, strict=False, base_date=None)
+    # datePage0 = datefinder.find_dates(final_text[0], index=True, strict=False, base_date=None)
+    datePage0 = datefinder.find_dates(final_text, index=True, strict=False, base_date=None)
     dates = []
     print("On page 0: ")
     for i in datePage0:
@@ -80,7 +72,8 @@ def extractMetaData(extractedText):
         datePages = datefinder.find_dates(final_text[i])
         dates.append(datePages)
 ##title
-    result = final_text[0].split("\n")
+    # result = final_text[0].split("\n")
+    result = final_text.split("\n")
     titleCandidates = []
     for i in result: 
         line = i.split(" ")
@@ -89,6 +82,7 @@ def extractMetaData(extractedText):
             titleCandidates.append(i)
             
 ##places           
+    # text = final_text[0]
     text = final_text[0]
     newtext = text.replace("\n", " ")
     newtextsplit = newtext.split()

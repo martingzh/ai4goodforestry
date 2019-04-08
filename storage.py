@@ -3,7 +3,9 @@ import jsonpickle
 # pip install -U jsonpickle
 
 
+# A class that stores relevant metadata and text from a specific policy paper
 class PolicyPaper(object):
+	# Class Variables
 	country = []
 	date = None
 	title = []
@@ -27,6 +29,9 @@ class PolicyPaper(object):
 		self.filename = filename
 
 # def summary():
+# A method to retrieve file name by passing in the file path
+# Returns a file name
+
 def getFileName(file_path):
 	file_name = file_path.rsplit('/', 1)[1]
 	dot_index = file_name.rfind('.')
