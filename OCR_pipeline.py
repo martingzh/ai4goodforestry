@@ -16,6 +16,7 @@ from geotext import GeoText
 
 import time
 import textract
+import datetime
 
 
 
@@ -65,12 +66,14 @@ def extractMetaData(extractedText):
     # datePage0 = datefinder.find_dates(final_text[0], index=True, strict=False, base_date=None)
     datePage0 = datefinder.find_dates(final_text, index=True, strict=False, base_date=None)
     dates = []
-    print("On page 0: ")
+    #print("On page 0: ")
     for i in datePage0:
-        print(i)
-    for i in range(1, len(final_text)):
-        datePages = datefinder.find_dates(final_text[i])
-        dates.append(datePages)
+        #print(i)
+        dates.append(i[0].strftime('%Y-%m-%d %H:%M:%S'))
+#     for i in range(1, len(final_text)):
+#         datePages = datefinder.find_dates(final_text[i])
+#         dates.append(datePages)
+
 ##title
     # result = final_text[0].split("\n")
     result = final_text.split("\n")
@@ -82,11 +85,9 @@ def extractMetaData(extractedText):
             titleCandidates.append(i)
             
 ##places           
-    # text = final_text[0]
-    text = final_text[0]
+    text = final_text
     newtext = text.replace("\n", " ")
     newtextsplit = newtext.split()
-    print(newtextsplit)
     country = set()
     for i in newtextsplit:
         target = i.capitalize()
@@ -94,7 +95,8 @@ def extractMetaData(extractedText):
         if len(places.countries) > 0:
             # country.add(tuple(places.countries))
             country.update(places.countries)
-#             print (places.cities)            
+#             print (places.cities)
+
             
     return (dates, titleCandidates, list(country))
 

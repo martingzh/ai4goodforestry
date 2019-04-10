@@ -13,31 +13,24 @@ class PolicyPaper(object):
 	paperType = ""
 	filename = ""
 	cleanedText = None
-	LDA = None
-	corpus = None
 
 	# filename for now should be the relative path of the file
-	def __init__ (self, filename):
+	def __init__ (self, file_path):
 		#(extracted text, (dates, [title candidates], countries))
-		(et, mtd) = extractTextFromPaper(filename)
+		(et, mtd) = extractTextFromPaper(file_path)
 		self.country = mtd[2]
 		self.date = mtd[0]
 		self.title = mtd[1]
 		self.extractedText = et
 		# Currently paper type is a placeholder
 		self.paperType = "policy"
-		self.filename = filename
+		self.filename = getFileName(file_path)
 
 # def summary():
 # A method to retrieve file name by passing in the file path
 # Returns a file name
-
 def getFileName(file_path):
-	file_name = file_path.rsplit('/', 1)[1]
-	dot_index = file_name.rfind('.')
-	if dot_index == -1:
-		return file_name
-	return file_name[:dot_index]
+	return file_path.rsplit('/', 1)[1]
 
 # A method that is used to convert Python Objects, i.e. PolicyPaper objects, to JSON files. 
 # Argument: PolicyPaper instnace
