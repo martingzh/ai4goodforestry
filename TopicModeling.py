@@ -92,3 +92,19 @@ def LDA(lemmatized_sents):
                                            per_word_topics=True)
     
     return [corpus, lda_model]
+
+def pull_sentences_with_keywords(sentences, keywords):
+    sentences_out = []
+    
+    for sentence in sentences:
+        if set(sentence).intersection(set(keywords)) != set(sentence):
+            sentences_out.append(sentence)
+            
+    return sentences_out
+
+
+
+
+
+
+
