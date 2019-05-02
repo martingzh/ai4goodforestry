@@ -2,10 +2,12 @@
 
 import gensim
 import nltk
+import re
 import spacy
 import gensim.corpora as corpora
 from gensim.utils import simple_preprocess
 from gensim.models import CoherenceModel
+from gensim.parsing.preprocessing import remove_stopwords
 nltk.download('punkt')
 
 #def make_bigrams(texts):
@@ -40,8 +42,20 @@ def sent_to_words(sentences):
     for sentence in sentences:
         yield(gensim.utils.simple_preprocess(str(sentence), deacc=False)) 
 
+#A method to convert a long string to single sentences
+#Arguments: long string
+#Returns: list of sentences
         
-        
+
+def ReturnSentence(longstring):
+    # convert into long string and remove extra whitespaces
+    sentence = re.sub(r'(.) ', r'\1', longstring) 
+    # remove \n
+    sentences = sentence.replace('\n','')
+    
+    # split into list of sentences
+    return sentences.split('.')
+
 #A method to convert a list of pages into a list of sentences
 #Arguments: list of pages
 #Returns: list of lemmatized sentences
@@ -49,11 +63,13 @@ def sent_to_words(sentences):
 def toSentences(pageList):    
     # convert into long string (from list of page texts)
     longString = ''.join(pageList).replace('\n',' ')
-    # split into list of sentences
-    sentences = nltk.sent_tokenize(longString)
-        
+    
     # Remove Stop Words
-    # sentences_nostops = remove_stopwords(sentences)
+    sentences_nostops = remove_stopwords(longString)
+    
+    # split into list of sentences
+    sentences = nltk.sent_tokenize(sentences_nostops)
+        
     
     # Convert sentences to list of words
     data_words = list(sent_to_words(sentences))
