@@ -1,8 +1,25 @@
 <!doctype html>
 <title>Global Forestry Analysis</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<nav>
-  <h1>Global Forestry Analysis</h1>
+<h1>Global Forestry Analysis</h1>
+<div id="sentences">
+  <h2>Extract sentences using keywords</h2>
+  Country: 
+    <select>
+      <option value="Brazil">Brazil</option>
+      <option value="India">India</option>
+      <option value="Kenya">Kenya</option>
+      <option value="Malawi">Malawi</option>
+      <option value="Mexico">Mexico</option>
+      <option value="Rwanda">Rwanda</option>
+    </select>
+    <br>
+  Year: <input type="text" name="Year" ><br>
+  Keywords: <input type="text" name="Keywords" ><br>
+  <button type="button">Extract now</button>
+</div>
+<div id="classification">
+  <h2>Classify documents' Incentives/Disincentives/Motivations</h1>
   <form action="/action_page.php">
     Country: 
     <select>
@@ -15,14 +32,42 @@
     </select>
     <br>
     Year: <input type="text" name="Year" ><br>
-    Key Words: <input type="text" name="Key words"><br>
+    URL: <input type="text" name="url" ><br>
     Enacted By Law:   
       <input type="radio" value="yes" name="law"> Yes
       <input type="radio" value="no" name="law"> No<br>
     Enacted By Executive:   
       <input type="radio" value="yes" name="exec."> Yes
       <input type="radio" value="no" name="exec."> No<br>
-    <input type="submit" value="Submit">
+    Did it become law?   
+      <input type="radio" value="yes" name="exec."> Yes
+      <input type="radio" value="no" name="exec."> No<br>
+    Is it in use today?   
+      <input type="radio" value="yes" name="exec."> Yes
+      <input type="radio" value="no" name="exec."> No<br>
+    <button type="button">Gimme the Incentives!</button>
+    <button type="button">Gimme the Disincentives!</button>
+    <button type="button">Gimme the Motivations!</button>
   </form>
+</div>
+<div id="new documents">
+  <h2>Storing New Documents</h2>
+  URL: <input type="text" name="url" ><br>
+  Country: 
+    <select>
+      <option value="Brazil">Brazil</option>
+      <option value="India">India</option>
+      <option value="Kenya">Kenya</option>
+      <option value="Malawi">Malawi</option>
+      <option value="Mexico">Mexico</option>
+      <option value="Rwanda">Rwanda</option>
+    </select>
+    <br>
+  Year: <input type="text" name="Year" ><br>
+  <form action="/action_page.php">
+  <input type="file" name="inputFile" accept="image/*,pdf"><br>
+  <input type="submit">
+</form>
 
-</nav>
+</div>
+g
