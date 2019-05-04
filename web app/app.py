@@ -31,6 +31,7 @@ def handleFileUpload():
     return photo.filename + " successfully uploaded"
 
 
+
 @app.route('/getall')
 def getall():
 	cur = mysql.connection.cursor()
