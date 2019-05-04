@@ -4,10 +4,11 @@ from flaskext.mysql import MySQL
 # from flask_sqlalchemy import SQLAlchemy
 from werkzeug.debug import DebuggedApplication
 from werkzeug.utils import secure_filename
+import os
 mysql = MySQL()
 app = Flask(__name__)
 
-UPLOAD_FOLDER = '/path/to/the/uploads' # must change this to the server database
+UPLOAD_FOLDER = '/Users/Jiwon/Desktop/ai4goodforestry/folder' # must change this to the server database
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app.config['MYSQL_DATABASE_USER'] = 'root'
@@ -21,24 +22,14 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER # must change this to the server dat
 def home():
     return render_template('home.html')
 
-@app.route('/', methods=['POST'])
-def upload_file():
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        # if user does not select file, browser also
-        # submit an empty part without filename
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('uploaded_file',
-                                    filename=filename))
+@app.route("/handleUpload", methods=['POST'])
+def handleFileUpload():
+    if 'photo' in request.files:
+        photo = request.files['photo']
+        if photo.filename != '':            
+            photo.save(os.path.join('/Users/Jiwon/Desktop/ai4goodforestry/folder', photo.filename))
+    return photo.filename + " asuccessfully uploaded"
+
 
 @app.route('/getall')
 def getall():
