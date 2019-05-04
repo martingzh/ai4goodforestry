@@ -1,9 +1,11 @@
 <!doctype html>
+<html>
+<body>
 <title>Global Forestry Analysis</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <h1>Global Forestry Analysis</h1>
 <div id="sentences">
-  <h2>Extract sentences using keywords</h2>
+  <h2>Visualizing Topics from Latent Dirichlet Allocation(LDA)</h2>
   Country: 
     <select>
       <option value="Brazil">Brazil</option>
@@ -15,36 +17,32 @@
     </select>
     <br>
   Year: <input type="text" name="Year" ><br>
-  Keywords: <input type="text" name="Keywords" ><br>
-  <button type="button">Extract now</button>
+<!--   Keywords: <input type="text" name="Keywords" ><br> -->
+  Paper Title: <input type="text" name="Title" ><br>
+  <button type="button">pyLDAvis</button>
+  <button type="button">WordCloud</button>
 </div>
 <div id="classification">
   <h2>Classify documents' Incentives/Disincentives/Motivations</h1>
   <form action="/action_page.php">
     Country: 
-    <select>
-      <option value="Brazil">Brazil</option>
-      <option value="India">India</option>
-      <option value="Kenya">Kenya</option>
-      <option value="Malawi">Malawi</option>
-      <option value="Mexico">Mexico</option>
-      <option value="Rwanda">Rwanda</option>
-    </select>
+      <select>
+        <option value="Brazil">Brazil</option>
+        <option value="India">India</option>
+        <option value="Kenya">Kenya</option>
+        <option value="Malawi">Malawi</option>
+        <option value="Mexico">Mexico</option>
+        <option value="Rwanda">Rwanda</option>
+      </select>
     <br>
-    Year: <input type="text" name="Year" ><br>
-    URL: <input type="text" name="url" ><br>
-    Enacted By Law:   
-      <input type="radio" value="yes" name="law"> Yes
-      <input type="radio" value="no" name="law"> No<br>
-    Enacted By Executive:   
-      <input type="radio" value="yes" name="exec."> Yes
-      <input type="radio" value="no" name="exec."> No<br>
-    Did it become law?   
-      <input type="radio" value="yes" name="exec."> Yes
-      <input type="radio" value="no" name="exec."> No<br>
-    Is it in use today?   
-      <input type="radio" value="yes" name="exec."> Yes
-      <input type="radio" value="no" name="exec."> No<br>
+    Language: 
+      <select>
+        <option value="English">English</option>
+        <option value="Spanish">Spanish</option>
+      </select>
+    <br>
+    <input type="file" name="inputFile" accept="image/*,pdf"><br>
+
     <button type="button">Gimme the Incentives!</button>
     <button type="button">Gimme the Disincentives!</button>
     <button type="button">Gimme the Motivations!</button>
@@ -52,21 +50,50 @@
 </div>
 <div id="new documents">
   <h2>Storing New Documents</h2>
-  URL: <input type="text" name="url" ><br>
-  Country: 
-    <select>
-      <option value="Brazil">Brazil</option>
-      <option value="India">India</option>
-      <option value="Kenya">Kenya</option>
-      <option value="Malawi">Malawi</option>
-      <option value="Mexico">Mexico</option>
-      <option value="Rwanda">Rwanda</option>
-    </select>
-    <br>
-  Year: <input type="text" name="Year" ><br>
-  <form action="/action_page.php">
-  <input type="file" name="inputFile" accept="image/*,pdf"><br>
-  <input type="submit">
-</form>
-
+  <form>
+    Country: 
+      <select>
+        <option value="Brazil">Brazil</option>
+        <option value="India">India</option>
+        <option value="Kenya">Kenya</option>
+        <option value="Malawi">Malawi</option>
+        <option value="Mexico">Mexico</option>
+        <option value="Rwanda">Rwanda</option>
+      </select>
+      <br>
+    Year: <input type="text" name="Year" ><br>
+    <form action="/action_page.php">
+    <input type="file" name="inputFile" accept="image/*,pdf"><br>
+    <input type="submit">
+  </form>
 </div>
+
+<div class="footer">
+  <p>UC Berkeley Data-X Global Forestry Project</p>
+  <p>Created by: Shivaram Yellamilli, Kimberly Zai, Catharine Wu, Jiwon Lee, Martin Guo </p>
+  <p>With the support of:</p>
+  <p>James Hodson from the AI For Good Foundation</p>
+  <p>Kathleen Buckingham, John Brandt from the World Resources Institute</p>
+  <p>Aiyana Lynn Bodi, Maria Fernanda Chavez, Jake Higdon, Alison Clare Wolters, Zachary Ross Chertok from Columbia University  </p>
+</div>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   text-align: center;
+   font-size: 10px;
+}
+p {
+    display: block;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+</style>
+
+</body>
+</html>
