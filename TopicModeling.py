@@ -56,11 +56,24 @@ def ReturnSentence(longstring):
     # split into list of sentences
     return sentences.split('.')
 
+#A method to only keep sentences that contain keywords
+#Arguments: the list of sentences to be processed
+#Returns: a list of sentences with keywords in them
+
+def extractKeywordSentences(sentences, keywords):
+    result = []
+    for s in sentences:
+        for k in keywords:
+            if k in s:
+                result.append(s)
+                break
+    return result
+
 #A method to convert a list of pages into a list of sentences
 #Arguments: list of pages
 #Returns: list of lemmatized sentences
 
-def toSentences(pageList):    
+def toSentences(pageList, language='English', keywords=None):    
     # convert into long string (from list of page texts)
     longString = ''.join(pageList).replace('\n',' ')
     
@@ -69,8 +82,10 @@ def toSentences(pageList):
     
     # split into list of sentences
     sentences = nltk.sent_tokenize(sentences_nostops)
-        
     
+    if keywords:
+        sentences = extractKeywordSentences(sentences, keywords)
+        
     # Convert sentences to list of words
     data_words = list(sent_to_words(sentences))
     
