@@ -64,9 +64,10 @@
     </select>
     <br>
   Year: <input type="text" name="Year" ><br>
-  <form action="/action_page.php">
-  <input type="file" name="inputFile" accept="image/*,pdf"><br>
-  <input type="submit">
+  <form action="/handleUpload" method="post" enctype="multipart/form-data">
+            Choose the file: <input type="file" name="photo"/><BR>
+                <input type="submit" value="Upload"/>
+        </form> 
 </form>
 
 </div>
