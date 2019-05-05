@@ -18,7 +18,42 @@ import time
 import textract
 import datetime
 
+import io
+ 
+from pdfminer3.converter import TextConverter
+from pdfminer3.pdfinterp import PDFPageInterpreter
+from pdfminer3.pdfinterp import PDFResourceManager
+from pdfminer3.pdfpage import PDFPage
+ 
+def extractTextByPage(pdf_path):
+    with open(pdf_path, 'rb') as fh:
+        for page in PDFPage.get_pages(fh, 
+                                      caching=True,
+                                      check_extractable=True):
+            resource_manager = PDFResourceManager()
+            fake_file_handle = io.StringIO()
+            converter = TextConverter(resource_manager, fake_file_handle)
+            page_interpreter = PDFPageInterpreter(resource_manager, converter)
+            page_interpreter.process_page(page)
+ 
+            text = fake_file_handle.getvalue()
+            yield text
+ 
+            # close open handles
+            converter.close()
+            fake_file_handle.close()
 
+def extractTextFromPaper(pdf_path):
+    final_text = []
+    for page in extractTextByPage(pdf_path):
+        final_text.append(page)
+    
+    print("Paper successfully converted!")
+    full_text = ' '.join(final_text)
+    
+    metadata = extractMetaData(full_text)
+    print("Metadata extracted!")
+    return (final_text, metadata)
 
 # A method that extracts text from the PDF. Please supply relative path of PDF
 # Argument: filename relative path (i.e. "sample data/Kenya/AgricultureFisheriesandFoodAuthorityNo13of2013.PDF")
@@ -26,14 +61,14 @@ import datetime
 # contains the contents corresponding to one page of the file
 # Note: This might take a while to run.
 
-def extractTextFromPaper(filename):
-    final_text = []
-    # Extract text of the entire document and store it into final_text
-    final_text = textract.process(filename).decode("utf-8") 
-    print("Paper successfully converted!")
-    metadata = extractMetaData(final_text)
-    print("Metadata extracted!")
-    return (final_text, metadata)
+# def extractTextFromPaper(filename):
+#     final_text = []
+#     # Extract text of the entire document and store it into final_text
+#     final_text = textract.process(filename).decode("utf-8") 
+#     print("Paper successfully converted!")
+#     metadata = extractMetaData(final_text)
+#     print("Metadata extracted!")
+#     return (final_text, metadata)
 
 # A method that extracts all the text from a specific folder in sample data. 
 # Argument: Folder that you want to extract text from
@@ -99,4 +134,3 @@ def extractMetaData(extractedText):
 
             
     return (dates, titleCandidates, list(country))
-
