@@ -4,6 +4,8 @@ from flaskext.mysql import MySQL
 # from flask_sqlalchemy import SQLAlchemy
 from werkzeug.debug import DebuggedApplication
 from werkzeug.utils import secure_filename
+import urllib
+
 import os
 mysql = MySQL()
 app = Flask(__name__)
@@ -12,7 +14,7 @@ UPLOAD_FOLDER = '/Users/Jiwon/Desktop/ai4goodforestry/folder' # must change this
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'XYZ'
+# app.config['MYSQL_DATABASE_PASSWORD'] = 'XYZ'
 app.config['MYSQL_DATABASE_DB'] = 'root@forestry'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER # must change this to the server database
@@ -24,13 +26,18 @@ def home():
 
 @app.route("/handleUpload", methods=['POST'])
 def handleFileUpload():
-    if 'photo' in request.files:
-        photo = request.files['photo']
-        if photo.filename != '':            
-            photo.save(os.path.join('/Users/Jiwon/Desktop/ai4goodforestry/folder', photo.filename))
-    return photo.filename + " successfully uploaded"
+    if 'file' in request.files:
+        file = request.files['file']
+        if file.filename != '':            
+            file.save(os.path.join(UPLOAD_FOLDER, file.filename))
+    return file.filename + " successfully uploaded"
 
-
+@app.route("/handleUploadURL", methods = ['POST'])
+def handleFileUploadURL():
+    link = "http://www.somesite.com/details.pl?urn=2344"
+    f = urllib.urlopen(link)
+    myfile = f.read()
+    print(myfile)
 
 @app.route('/getall')
 def getall():
@@ -43,8 +50,8 @@ def getall():
 	return printthis
 
 
-@app.route("/Authenticate")
-def Authenticate():
+@app.route("/authenticate")
+def authenticate():
     password = request.args.get('Password')
     cursor = mysql.connect().cursor()
     cursor.execute("SELECT * from user where Password='" + password + "'")
