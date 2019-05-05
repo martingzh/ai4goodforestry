@@ -51,24 +51,28 @@
 </div>
 <div id="new documents">
   <h2>Storing New Documents</h2>
-<<<<<<< HEAD
-  <form>
-    Country: 
-      <select>
-        <option value="Brazil">Brazil</option>
-        <option value="India">India</option>
-        <option value="Kenya">Kenya</option>
-        <option value="Malawi">Malawi</option>
-        <option value="Mexico">Mexico</option>
-        <option value="Rwanda">Rwanda</option>
-      </select>
-      <br>
-    Year: <input type="text" name="Year" ><br>
-    <form action="/action_page.php">
-    <input type="file" name="inputFile" accept="image/*,pdf"><br>
-    <input type="submit">
+
+  <form action = "/handleUploadUrl", method = "post", enctype = "multipart/form-data">
+        URL: <input type="text" name="url" ><br>
+        <input type = "submit" value="Upload">
   </form>
-</div>
+
+  Country: 
+    <select>
+      <option value="Brazil">Brazil</option>
+      <option value="India">India</option>
+      <option value="Kenya">Kenya</option>
+      <option value="Malawi">Malawi</option>
+      <option value="Mexico">Mexico</option>
+      <option value="Rwanda">Rwanda</option>
+    </select>
+    <br>
+  Year: <input type="text" name="Year" ><br>
+  <form action="/handleUpload" method="post" enctype="multipart/form-data">
+            Choose the file: <input type="file" name="file"/><BR>
+                <input type="submit" value="Upload"/>
+        </form> 
+</form>
 
 <div class="footer">
   <p>UC Berkeley Data-X Global Forestry Project</p>
@@ -99,24 +103,3 @@ p {
 
 </body>
 </html>
-=======
-  URL: <input type="text" name="url" ><br>
-  Country: 
-    <select>
-      <option value="Brazil">Brazil</option>
-      <option value="India">India</option>
-      <option value="Kenya">Kenya</option>
-      <option value="Malawi">Malawi</option>
-      <option value="Mexico">Mexico</option>
-      <option value="Rwanda">Rwanda</option>
-    </select>
-    <br>
-  Year: <input type="text" name="Year" ><br>
-  <form action="/handleUpload" method="post" enctype="multipart/form-data">
-            Choose the file: <input type="file" name="photo"/><BR>
-                <input type="submit" value="Upload"/>
-        </form> 
-</form>
-
-</div>
->>>>>>> bc40e8c7a9efcd391126af4f1ff5468217983e91
