@@ -5,7 +5,7 @@ from flaskext.mysql import MySQL
 from werkzeug.debug import DebuggedApplication
 from werkzeug.utils import secure_filename
 import urllib
-import Classification.py
+from classification import Classify
 
 import os
 mysql = MySQL()
@@ -34,19 +34,19 @@ def handleFileUpload():
     return file.filename + " successfully uploaded"
 
 @app.route("/predict", methods=['POST'])
-def classify():
-    if request.method == "POST":            
+def predictInDis():
+    if request.method == "GET":            
         tvalue = request.form['selectCountryClass']
-        if tvalue = "India":
+        if tvalue == "India":
             classify_india = True
             classify_mexico = False
 
         else:
             classify_india = False
             classify_mexico = True
-        document = request.form['info']
-
-    return Classify(document,classify_india,classify_mexico)
+        document = request.form['form2']
+    results = Classify(document,classify_india,classify_mexico)
+    return "classification done!" 
 
 
 @app.route('/getall')

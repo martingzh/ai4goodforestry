@@ -66,6 +66,10 @@
   <a href="IN_pyLDAvis.html"><button type="button">India</button></a>
   <a href="MX_pyLDAvis.html"><button type="button">Mexico</button></a>
 </div>
+
+
+
+
 <div id="classification">
   <h2>Classify documents' Incentives/Disincentives/Motivations</h1>
   <form action="/action_page.php" name= 'selectCountryClass'>
@@ -84,16 +88,41 @@
         <option value="Spanish">Spanish</option>
       </select>
     <br>
-      <form action="/handleUpload" method="post" enctype="multipart/form-data">
-            Choose the file: <input type="file" name="document"/><BR>
-        </form> 
+    </form>
 
+    <form action="/handleUpload" method="post" enctype="multipart/form-data">
+            Choose the file: <input type="file" name="jumpmenu"/><BR>
+    </form> 
+
+<!--     <form action="/predict" method="post" enctype="multipart/form-data">
+ -->    
+ <form>
+    <select name="jumpmenu" onChange="jumpto(document.form2.jumpmenu.options[document.form2.jumpmenu.options.selectedIndex].value)">
+        <option>Analyze document...</option>
+        <option value=1/>Creates the state policy to support cooperatives within the state of sao paulo.pdf' </option>
+        <option value=2/> Creating the Amazon Fund established by the National Bank for Economic and Social Development (BNDES).pdf </option>
+        <option value=3/>Creating the fund for agricultural, livestock, and fisheries development.pdf</option>
+        <option value=4/>Creating the social fund for assistance to family farming within the espirto santo state.pdf</option>
+        <option value=5/>Creating the social fund for assistance to family farming within the state of Espirito Santo.pdf</option>
+    </select><br>
+    <form action = "/predict" method = "get"> 
+    Predict: <input type="submit" name="button"/>
+    </form> 
     <!-- <a href="predict.html"><button type="button">Predict</button></a> -->
-    <form action = "/predict" method = "post" enctype = "multipart/form-data">
-      <input type = "file" name ="filename"/>
   
   </form>
 </div>
+
+
+
+
+
+
+
+
+
+
+
 <div id="new documents">
   <h2>Storing New Documents</h2>
 <!-- 
