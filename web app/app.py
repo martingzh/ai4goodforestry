@@ -48,7 +48,6 @@ def predictInDis():
     results = Classify(document,classify_india,classify_mexico)
     return "classification done!" 
 
-
 @app.route('/getall')
 def getall():
 	cur = mysql.connection.cursor()
@@ -58,19 +57,6 @@ def getall():
 	for i in returnvals:
 		printthis += i + "<br>"
 	return printthis
-
-
-# @app.route("/authenticate")
-# def authenticate():
-#     password = request.args.get('Password')
-#     cursor = mysql.connect().cursor()
-#     cursor.execute("SELECT * from user where Password='" + password + "'")
-#     data = cursor.fetchone()
-#     if data is None:
-#      return "Password is wrong"
-#     else:
-#      return "Logged in successfully"
-
 
 if __name__ == "__main__":
    app.run(debug = True)    
