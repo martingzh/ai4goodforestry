@@ -115,7 +115,7 @@ def LDA(lemmatized_sents):
     
     lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus,
                                            id2word=id2word,
-                                           num_topics=30, 
+                                           num_topics=15, 
                                            random_state=100,
                                            update_every=3,
                                            passes=30,
