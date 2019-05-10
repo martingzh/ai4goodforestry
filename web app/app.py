@@ -5,6 +5,7 @@ from flaskext.mysql import MySQL
 from werkzeug.debug import DebuggedApplication
 from werkzeug.utils import secure_filename
 import urllib
+from classification import Classify
 
 import os
 mysql = MySQL()
@@ -32,12 +33,21 @@ def handleFileUpload():
             file.save(os.path.join(UPLOAD_FOLDER, file.filename))
     return file.filename + " successfully uploaded"
 
-@app.route("/handleUploadURL", methods = ['POST'])
-def handleFileUploadURL():
-    link = "http://www.somesite.com/details.pl?urn=2344"
-    f = urllib.urlopen(link)
-    myfile = f.read()
-    print(myfile)
+@app.route("/predict", methods=['POST'])
+def predictInDis():
+    if request.method == "GET":            
+        tvalue = request.form['selectCountryClass']
+        if tvalue == "India":
+            classify_india = True
+            classify_mexico = False
+
+        else:
+            classify_india = False
+            classify_mexico = True
+        document = request.form['form2']
+    results = Classify(document,classify_india,classify_mexico)
+    return "classification done!" 
+
 
 @app.route('/getall')
 def getall():
@@ -50,16 +60,16 @@ def getall():
 	return printthis
 
 
-@app.route("/authenticate")
-def authenticate():
-    password = request.args.get('Password')
-    cursor = mysql.connect().cursor()
-    cursor.execute("SELECT * from user where Password='" + password + "'")
-    data = cursor.fetchone()
-    if data is None:
-     return "Password is wrong"
-    else:
-     return "Logged in successfully"
+# @app.route("/authenticate")
+# def authenticate():
+#     password = request.args.get('Password')
+#     cursor = mysql.connect().cursor()
+#     cursor.execute("SELECT * from user where Password='" + password + "'")
+#     data = cursor.fetchone()
+#     if data is None:
+#      return "Password is wrong"
+#     else:
+#      return "Logged in successfully"
 
 
 if __name__ == "__main__":

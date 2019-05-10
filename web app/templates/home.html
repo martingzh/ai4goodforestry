@@ -4,11 +4,11 @@
 <title>Global Forestry Analysis</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <h1>Global Forestry Analysis</h1>
-<div id="info">
+<div id="info" name = "Classify">
   <h2>Extract Info from Existing Documents</h2>
   <h4>This feature only applies to existing documents</h4>
   <p>Please select a document below:</p>
-  <script type="text/javascript">
+  <script type="text/javascript" >
      var titleLists = new Array(6) 
      titleLists["empty"] = ["Select a Document"]; 
      titleLists["Brazil"] = ['Creates the state policy to support cooperatives within the state of sao paulo.pdf', 'Creating the Amazon Fund established by the National Bank for Economic and Social Development (BNDES).pdf', 'Creating the fund for agricultural, livestock, and fisheries development.pdf', 'Creating the social fund for assistance to family farming within the espirto santo state.pdf', 'Creating the social fund for assistance to family farming within the state of Espirito Santo.pdf', 'Creating the state fund to fight and eradicate poverty (FECOEP).pdf', 'Creating the state policy for agroecology and organic production (PEAPO).pdf', 'Decree instituting the Pacotuba Forestry Reserve.pdf', 'Decree No. 7.390 regulating Law No. 12.187, instituting the National Policy on Climate Change.pdf', 'Ecologic-Economical Zoning of Brazil.pdf', 'Establishing procedures to regulate harvesting and marketing of exotic forest trees.pdf', 'Establishing the crop insurance-fund for family farmers in minas gerais and espirito santo states.pdf', 'Establishing the Espirito Santo state policy on PEATER and PROATERES.pdf', 'Establishing the National System of Protected Areas Management - SNUC.pdf', 'Establishing the programme for the certification of agricultural, livestock, and agroindusrial products.pdf', 'Establishing the state programme for sustainable rural development.pdf', 'Forest Code.pdf', 'Law No. 12.187 instituting the National Policy on Climate Change.pdf', 'Management of Public Forests, Brazilian Forest Service and National Fund for Forest Development.pdf', 'National Fund on Climate Change.pdf', 'National Water Resources Policy.pdf', 'On the use, conservation, and protection of agricultural land.pdf', 'Providing for the development fund of Espirito Santo (FUNDES).pdf', 'Providing for the state policy to support cooperatives within the state of minas gerais.pdf', 'Regulating the gradual elimination of the practive of burning sugar can straw.pdf', 'SNCR.pdf', 'Support Programmes for the Environmental Conservation and for the Promotion of Rural Productive Activities.pdf']; 
@@ -17,7 +17,6 @@
      titleLists["Malawi"] = []; 
      titleLists["Mexico"] = ['Agreement through which reference costs are issued for reforestation or restoration and maintenance for environmental compensation for land use change in forest land....pdf', 'Cadastre Law for the State of Chiapas.pdf', 'Cadastre Law of the State of Quintana Roo.pdf', 'Conservation and Restoration of Forest Ecosystems Program.pdf', 'Environmental Law For the State of Chiapas.pdf', 'Federal Law of Special Economic Zones.pdf', 'Forest Law of the State of Quintana Roo.pdf', 'General Law of Ecological Balance and Environmental Protection.pdf', 'General Law of Human Settlements, Territorial Planning....pdf', 'General Law of Sustainable Forest Development.pdf', 'Guidelines for the granting of subsidies, designed to promote forest development.pdf', 'Law for Adaptation and Mitigation of Climate Change in the State of Chiapas.pdf', 'Law for Development of the Competitiveness of Micro, Small and Medium Enterprises.pdf', 'Law of Burning and Prevention of Forest Fires for the State of Quintana Roo.pdf', 'Law of Sustainable Rural Cities for the State of Chiapas.pdf', 'Law of Sustainable Rural Development of the State of Chiapas.pdf', 'Law of Sustainable Rural Development.pdf', 'Law on climate change action in the State of Quintana Roo.pdf', 'Mexico Forestry Law.pdf', 'National Forestry Program 2016.pdf', 'Program for Forest Development.pdf', 'Program for the Development of Commercial Forest Plantations.pdf', 'Regulation of the Cadastre Law of the State of Quintana Roo.pdf', 'Specifications to mitigate the adverse effects on biodiversity caused by the change of land use of agricultural forest lands.pdf', 'Sustainable Forestry Development Law for the State of Chiapas (Decree No. 256).pdf']; 
      titleLists["Rwanda"]= []; 
-
      function titleChange(selectObj) {  
      var idx = selectObj.selectedIndex;  
      var which = selectObj.options[idx].value; 
@@ -67,9 +66,13 @@
   <a href="IN_pyLDAvis.html"><button type="button">India</button></a>
   <a href="MX_pyLDAvis.html"><button type="button">Mexico</button></a>
 </div>
+
+
+
+
 <div id="classification">
   <h2>Classify documents' Incentives/Disincentives/Motivations</h1>
-  <form action="/action_page.php">
+  <form action="/action_page.php" name= 'selectCountryClass'>
     Country: 
       <select>
         <option value="item0">--Select a Country--</option>
@@ -85,22 +88,49 @@
         <option value="Spanish">Spanish</option>
       </select>
     <br>
-      <form action="/handleUpload" method="post" enctype="multipart/form-data">
-            Choose the file: <input type="file" name="file"/><BR>
-        </form> 
+    </form>
 
-    <a href="predict.html"><button type="button">Predict</button></a>
+    <form action="/handleUpload" method="post" enctype="multipart/form-data">
+            Choose the file: <input type="file" name="jumpmenu"/><BR>
+    </form> 
+
+<!--     <form action="/predict" method="post" enctype="multipart/form-data">
+ -->    
+ <form>
+    <select name="jumpmenu" onChange="jumpto(document.form2.jumpmenu.options[document.form2.jumpmenu.options.selectedIndex].value)">
+        <option>Analyze document...</option>
+        <option value=1/>Creates the state policy to support cooperatives within the state of sao paulo.pdf' </option>
+        <option value=2/> Creating the Amazon Fund established by the National Bank for Economic and Social Development (BNDES).pdf </option>
+        <option value=3/>Creating the fund for agricultural, livestock, and fisheries development.pdf</option>
+        <option value=4/>Creating the social fund for assistance to family farming within the espirto santo state.pdf</option>
+        <option value=5/>Creating the social fund for assistance to family farming within the state of Espirito Santo.pdf</option>
+    </select><br>
+    <form action = "/predict" method = "get"> 
+    Predict: <input type="submit" name="button"/>
+    </form> 
+    <!-- <a href="predict.html"><button type="button">Predict</button></a> -->
   
   </form>
 </div>
+
+
+
+
+
+
+
+
+
+
+
 <div id="new documents">
   <h2>Storing New Documents</h2>
-
-<!--   <form action = "/handleUploadUrl", method = "post", enctype = "multipart/form-data">
+<!-- 
+  <form action = "/handleUploadUrl", method = "post", enctype = "multipart/form-data">
         URL: <input type="text" name="url" ><br>
         <input type = "submit" value="Upload">
-  </form> -->
-
+  </form>
+ -->
   Country: 
     <select>
       <option value="item0">--Select a Country--</option>
