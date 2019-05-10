@@ -133,8 +133,41 @@ def pull_sentences_with_keywords(sentences, keywords):
             
     return sentences_out
 
+# A method that returns the top three topics for a given document
+# Arguments: document: the string text of the document
+# 			 lda_model: the trained lda_model
+# Returns: Returns a list of the top three topics for a given document
 
+def get_document_topics(document, lda_model):
+	all_topics = lda_model.print_topics(-1)
 
+	# Preprocessing 
+
+	from gensim.corpora.dictionary import Dictionary
+	from gensim.utils import simple_tokenize
+
+	preprocess = simple_preprocess(document)
+	common_dictionary = Dictionary([document.split(" ")])
+	bow = common_dictionary.doc2bow(preprocess)
+
+	# Get document topics
+	import operator
+	document_topics = lda_model.get_document_topics(bow)
+	topics_ratio = dict(document_topics)
+
+	# Top Three proportions of topics. 
+	top_three = []
+	for i in range(0, 3):
+	    largest = max(topics_ratio.items(), key=operator.itemgetter(1))
+	    top_three.append(largest)
+	    del topics_ratio[largest[0]]
+
+	# Retrieve the three topics for this specific document
+	topics = []
+	for item in top_three:
+	    topics.append(all_topics[item[0]])
+	
+	return topics
 
 
 
