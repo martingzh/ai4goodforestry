@@ -9,57 +9,103 @@
   <h2>Extract Info from Existing Documents</h2>
   <h4>This feature only applies to existing documents</h4>
   <p>Please select a document below:</p>
-  <script type="text/javascript" >
-     var titleLists = new Array(6) 
-     titleLists["empty"] = ["Select a Document"]; 
-     titleLists["Brazil"] = ['Creates the state policy to support cooperatives within the state of sao paulo.pdf', 'Creating the Amazon Fund established by the National Bank for Economic and Social Development (BNDES).pdf', 'Creating the fund for agricultural, livestock, and fisheries development.pdf', 'Creating the social fund for assistance to family farming within the espirto santo state.pdf', 'Creating the social fund for assistance to family farming within the state of Espirito Santo.pdf', 'Creating the state fund to fight and eradicate poverty (FECOEP).pdf', 'Creating the state policy for agroecology and organic production (PEAPO).pdf', 'Decree instituting the Pacotuba Forestry Reserve.pdf', 'Decree No. 7.390 regulating Law No. 12.187, instituting the National Policy on Climate Change.pdf', 'Ecologic-Economical Zoning of Brazil.pdf', 'Establishing procedures to regulate harvesting and marketing of exotic forest trees.pdf', 'Establishing the crop insurance-fund for family farmers in minas gerais and espirito santo states.pdf', 'Establishing the Espirito Santo state policy on PEATER and PROATERES.pdf', 'Establishing the National System of Protected Areas Management - SNUC.pdf', 'Establishing the programme for the certification of agricultural, livestock, and agroindusrial products.pdf', 'Establishing the state programme for sustainable rural development.pdf', 'Forest Code.pdf', 'Law No. 12.187 instituting the National Policy on Climate Change.pdf', 'Management of Public Forests, Brazilian Forest Service and National Fund for Forest Development.pdf', 'National Fund on Climate Change.pdf', 'National Water Resources Policy.pdf', 'On the use, conservation, and protection of agricultural land.pdf', 'Providing for the development fund of Espirito Santo (FUNDES).pdf', 'Providing for the state policy to support cooperatives within the state of minas gerais.pdf', 'Regulating the gradual elimination of the practive of burning sugar can straw.pdf', 'SNCR.pdf', 'Support Programmes for the Environmental Conservation and for the Promotion of Rural Productive Activities.pdf']; 
-     titleLists["India"] = ['_MineralConservationandDevelopmentRules1988-converted.pdf', '15. Wildlife (Protection) Act, 1972.pdf', 'Andhra Pradesh (Agricultural Produce and Livestock) Markets Rules, 1969.-converted.pdf', 'andhyapradeshforest_act_1967.pdf', 'Biological Diversity Act 2002.pdf', 'CircularConcerningJointForestManagement1981.pdf', 'CoconutDevelopmentBoardAct1979.pdf', 'ForestConservationAct1980.pdf', 'IndianForestAct1927.pdf', 'MadhyaPradeshAct1999.pdf', 'MineralConcessionRules1960.pdf', 'NationalGreenTribunalAct2010.pdf', 'NationalMissionforaGreenIndia2014.pdf', 'ProtectionofPlantVarietiesandFarmersRightsAct2001.pdf', 'State Action Plan_Andhra-pradesh_2012.pdf', 'State Action Plan_Madhya-Pradesh_2014.pdf', 'THE COMPENSATORY AFFORESTATION FUND ACT, 2016.pdf', 'THE ENVIRONMENT (PROTECTION) ACT, 1986.pdf', 'THE SCHEDULED TRIBES AND OTHER TRADITIONAL FOREST DWELLERS (RECOGNITION OF FOREST RIGHTS) ACT, 2006.pdf', 'WetlandRules2010.pdf']; 
-     titleLists["Kenya"] = []; 
-     titleLists["Malawi"] = []; 
-     titleLists["Mexico"] = ['Agreement through which reference costs are issued for reforestation or restoration and maintenance for environmental compensation for land use change in forest land....pdf', 'Cadastre Law for the State of Chiapas.pdf', 'Cadastre Law of the State of Quintana Roo.pdf', 'Conservation and Restoration of Forest Ecosystems Program.pdf', 'Environmental Law For the State of Chiapas.pdf', 'Federal Law of Special Economic Zones.pdf', 'Forest Law of the State of Quintana Roo.pdf', 'General Law of Ecological Balance and Environmental Protection.pdf', 'General Law of Human Settlements, Territorial Planning....pdf', 'General Law of Sustainable Forest Development.pdf', 'Guidelines for the granting of subsidies, designed to promote forest development.pdf', 'Law for Adaptation and Mitigation of Climate Change in the State of Chiapas.pdf', 'Law for Development of the Competitiveness of Micro, Small and Medium Enterprises.pdf', 'Law of Burning and Prevention of Forest Fires for the State of Quintana Roo.pdf', 'Law of Sustainable Rural Cities for the State of Chiapas.pdf', 'Law of Sustainable Rural Development of the State of Chiapas.pdf', 'Law of Sustainable Rural Development.pdf', 'Law on climate change action in the State of Quintana Roo.pdf', 'Mexico Forestry Law.pdf', 'National Forestry Program 2016.pdf', 'Program for Forest Development.pdf', 'Program for the Development of Commercial Forest Plantations.pdf', 'Regulation of the Cadastre Law of the State of Quintana Roo.pdf', 'Specifications to mitigate the adverse effects on biodiversity caused by the change of land use of agricultural forest lands.pdf', 'Sustainable Forestry Development Law for the State of Chiapas (Decree No. 256).pdf']; 
-     titleLists["Rwanda"]= []; 
-     function titleChange(selectObj) {  
-     var idx = selectObj.selectedIndex;  
-     var which = selectObj.options[idx].value; 
-     cList = titleLists[which]; 
-     var cSelect = document.getElementById("title"); 
-     var len=cSelect.options.length; 
-     while (cSelect.options.length > 0) { 
-     cSelect.remove(0); 
-     } 
-     var newOption; 
-     for (var i=0; i<cList.length; i++) { 
-     newOption = document.createElement("option"); 
-     newOption.value = cList[i];  
-     newOption.text=cList[i]; 
-     try { 
-     cSelect.add(newOption); 
-     } 
-     catch (e) { 
-     cSelect.appendChild(newOption); 
-     } 
-     } 
-     } 
-  </script>
-  <label for="country">Select Country</label>
-    <select id="country" onchange="titleChange(this);">
-      <option value="empty">Select a Country</option>
-      <option value="Brazil">Brazil</option>
-      <option value="India">India</option>
-      <option value="Kenya">Kenya</option>
-      <option value="Malawi">Malawi</option>
-      <option value="Mexico">Mexico</option>
-      <option value="Rwanda">Rwanda</option>
+    <select id="country" onchange="location = this.value;">
+      <option value="empty">--Select a Document--</option>
+      <option value="Brazil">--Brazil----------------------------------------------------------</option>
+        <option value = "br_0.html">National Water Resources Policy</option>
+        <option value="br_1.html">Forest Code</option>
+        <option value="br_2.html">National REDD + Strategy ENREDD</option>
+        <option value="br_3.html">Law No. 4.829 creating the rural credit (SNCR - National System of Rural Credit)</option>
+        <option value="br_4.html">Decree of 13 December 2002 instituting the “Pacotuba” Forestry Reserve</option>
+        <option value="br_5.html">Creating the social fund for assistance to family farming within the Espirto Santo state</option>
+        <option value="br_6.html">Creates the state policy to support cooperatives within the state of sao paulo</option>
+        <option value="br_7.html">Providing for the state policy to support cooperatives within the state of minas gerais</option>
+        <option value="br_8.html">Creating the fund for agricultural, livestock, and fisheries development</option>
+        <option value="br_9.html">Joint Resolution IEF/SEMAD No. 1.906 establishing procedures to regulate harvesting and marketing of exotic forest tree planted within the State of Minas Gerais</option>
+        <option value="br_10.html">Decree No. 45.919 amending Decree No. 43.710 regulating Law No. 14.309 on the State Policies on Forestry and Biodiversity</option>
+        <option value="br_11.html">Decree No. 43.710 regulating Law No. 14.309 on the State Policies on Forestry and Biodiversity</option>
+        <option value="br_12.html">Law No. 14.309 on the State Policies on Forestry and Biodiversity</option>
+        <option value="br_13.html">Decree of 21 September 1999 creating the National Forest of "Ritápolis" within the State of Minas Gerais</option>
+        <option value="br_14.html">Decree No. 38.182 establishing the Protected Areas Management System</option>
+        <option value="br_15.html">Establishing the state policy on the technical assistance and rural extension for family farming and agrarian reform of the state of espirito santo (PEATER/ES) and the state programme of technical assistance and rural extension for family agriculture and agrarian reform of the state of espirto santo - PROATERES</option>
+        <option value="br_16.html">Regulating the gradual elimination of the practive of burning sugar cane straw</option>
+        <option value="br_17.html">On the use, conservation, and protection of agricultural land</option>
+        <option value="br_18.html">Decree No. 58.107 approving the Strategy for the State Sustainable Development</option>
+        <option value="br_19.html">Establishing the crop insurance-fund for family farmers in minas gerais and espirito santo states</option>
+        <option value="br_20.html">Creating the State Policy on Food Acquisition of Family Farming (PAAFamiliar)</option>
+        <option value="br_21.html">Establishing the multi-year plan of governmental action for the quadrennium 2016-2019 (PPAG 2016-2019)</option>
+        <option value="br_22.html">Creating the state policy for agroecologyy and organic production (PEAPO)</option>
+        <option value="br_23.html">Establishing the programme for the certification of agricultural, livestock, and agroindusrial products (certifica minas)</option>
+        <option value="br_24.html">Establishing the state programme for sustainable rural development and creating the special state support fund programme for sustainable rural development</option>
+        <option value="br_25.html">Creating the state fund to fight and eradicate poverty (FECOEP)</option>
+        <option value="br_26.html">Providing for the development fund of espirito santo (FUNDES)</option>
+        <option value="br_27.html">Creating the social fund for assistance to family farming within the espirto santo state</option>
+        <option value="br_28.html">Establishing the state policy on the technical assistance and rural extension for family farming and agrarian reform of the state of espirito santo (PEATER/ES) and the state programme of technical assistance and rural extension for family agriculture and agrarian reform of the state of espirto santo - PROATERES</option>
+        <option value="br_29.html">Creates the state policy to support cooperatives within the state of sao paulo</option>
+        <option value="br_30.html">Providing for the state policy to support cooperatives within the state of minas gerais</option>
+        <option value="br_31.html">Regulating the gradual elimination of the practice of burning sugar cane straw</option>
+        <option value="br_32.html">Establishing the crop insurance-fund for family farmers in minas gerais and espirito santo states</option>
+        <option value="br_33.html">Creating the fund for agricultural, livestock, and fisheries development</option>
+        <option value="br_34.html">On the use, conservation, and protection of agricultural land</option>
+        <option value="br_35.html">Law No. 12.187 instituting the National Policy on Climate Change</option>
+        <option value="br_36.html">Decree No. 7.390 regulating Law No. 12.187, instituting the National Policy on Climate Change</option>
+        <option value="br_37.html">National Fund on Climate Change</option>
+        <option value="br_38.html">Support Programmes for the Environmental Conservation and for the Promotion of Rural Productive Activities</option>
+        <option value="br_39.html">Ecologic-Economical Zoning of Brazil </option>
+        <option value="br_40.html">Creating the Amazon Fund established by the National Bank for Economic and Social Development (BNDES)</option>
+        <option value="br_41.html">Management of Public Forests, Brazilian Forest Service and National Fund for Forest Development</option>
+        <option value="br_42.html">Establishing the National System of Protected Areas Management - SNUC</option>
+      <option value="India">--India-----------------------------------------------------------</option>
+        <option value="in_0.html">Indian Forest Act</option>
+        <option value="in_1.html">Mineral Concession Rules</option>
+        <option value="in_2.html">The Coconut Development Board Act</option>
+        <option value="in_3.html">The Forest (Conservation) Act</option>
+        <option value="in_4.html">Circular Concerning Joint Forest Management</option>
+        <option value="in_5.html">Environment (Protection) Act</option>
+        <option value="in_6.html">Creating the State Policy on Food Acquisition of Family Farming (PAAFamiliar)</option>
+        <option value="in_7.html">The Indian Wildlife (Protection) Act</option>
+        <option value="in_8.html">The Protection of Plant Varieties and Farmers Act</option>
+        <option value="in_9.html">Biological Diversity Act</option>
+        <option value="in_10.html">Establishing the multi-year plan of governmental action for the quadrennium 2016-2019 (PPAG 2016-2019)</option>
+        <option value="in_11.html">Scheduled Tribes and other Traditional Forest Dwellers (Recognition of Forest Rights) Act</option>
+        <option value="in_12.html">National Green Tribunal Act</option>
+        <option value="in_13.html">The Compensatory Afforestation Fund Act (CAMPA)</option>
+        <option value="in_14.html">National Mission for a Green India</option>
+        <option value="in_15.html">Wetlands (Conservation and Management) Rules</option>
+        <option value="in_16.html">The Andhra Pradesh Forest Act</option>
+        <option value="in_17.html">Andhra Pradesh (Agricultural Produce and Livestock) Markets Act</option>
+        <option value="in_18.html">State Action Plan on Climate Change for Andhra Pradesh</option>
+        <option value="in_19.html">Madhya Pradesh State Action Plan on Climate Change</option>
+        <option value="in_20.html">Madhya Pradesh Act </option>
+      <option value="Mexico">--Mexico---------------------------------------------------------</option>
+        <option value="mx_0.html">Forestry Law</option>
+        <option value="mx_1.html">Guidelines for the granting of subsidies, designed to promote forest development</option>
+        <option value="mx_2.html">General Law of Sustainable Forest Development</option>
+        <option value="mx_3.html">Program for Forest Development</option>
+        <option value="mx_4.html">Program for the Development of Commercial Forest Plantations</option>
+        <option value="mx_5.html">Conservation and Restoration of Forest Ecosystems Program</option>
+        <option value="mx_6.html"> Agreement through which reference costs are issued for reforestation or restoration and maintenance for environmental compensation for land use change in forest land and the methodology for its estimation.</option>
+        <option value="mx_7.html">National Forestry Program 2016</option>
+        <option value="mx_8.html">General Law of Ecological Balance and Environmental Protection</option>
+        <option value="mx_9.html">Law for Development of the Competitiveness of Micro, Small and Medium Enterprises</option>
+        <option value="mx_10.html">Cadastre Law for the State of Chiapas</option>
+        <option value="mx_11.html">Sustainable Forestry Development Law for the State of Chiapas (Decree No. 256</option>
+        <option value="mx_12.html">Law for Adaptation and Mitigation of Climate Change in the State of Chiapas</option>
+        <option value="mx_13.html">Environmental Law For the State of Chiapas</option>
+        <option value="mx_14.html">Law of Sustainable Rural Cities for the State of Chiapas</option>
+        <option value="mx_15.html">Law of Sustainable Rural Development of the State of Chiapas</option>
+        <option value="mx_16.html">Cadastre Law of the State of Quintana Roo</option>
+        <option value="mx_17.html">Forest Law of the State of Quintana Roo</option>
+        <option value="mx_18.html">Regulation of the Cadastre Law of the State of Quintana Roo (separate from original)</option>
+        <option value="mx_19.html">Law on climate change action in the State of Quintana Roo</option>
+        <option value="mx_20.html">Law of Burning and Prevention of Forest Fires for the State of Quintana Roo</option>
+        <option value="mx_21.html">Federal Law of Special Economic Zones</option>
+        <option value="mx_22.html">General Law of Human Settlements, Territorial Planning and Urban Development</option>
+        <option value="mx_23.html">Law of Sustainable Rural Development</option>
+        <option value="mx_24.html">Specifications to mitigate the adverse effects on biodiversity caused by the change of land use of agricultural forest lands</option>
     </select>
-    <br/>
-    <label for="title">Select a Document</label>
-    <select id="title">
-      <option value="0">Select a document</option>
-    </select>
-     <br> 
-  <a href="extract.html"><button>Extract</button></a>
-    <br>
-</div>
+
+
 <div id="visulization">
   <h2>Visualizing Topics from Latent Dirichlet Allocation(LDA)</h2>
   <h4>This feature only applies to existing countries that have more than 10 documents</h4>
@@ -73,159 +119,47 @@
 
 <div id="classification">
   <h2>Classify documents' Incentives/Disincentives/Motivations</h1>
-<!--   <form action="/action_page.php" name= 'selectCountryClass'>
-    Country: 
-      <select>
-        <option value="item0">--Select a Country--</option>
-        <option value="Brazil">Brazil</option>
-        <option value="India">India</option>
-        <option value="Mexico">Mexico</option>
-      </select>
-    <br>
-    Language: 
-      <select>
-        <option value="item0">--Select a Language--</option>
-        <option value="English">English</option>
-        <option value="Spanish">Spanish</option>
-      </select>
-    <br>
-    </form> -->
 
     <form action="/handleUpload" method="post" enctype="multipart/form-data">
-            Choose the file: <input type="file" name="jumpmenu"/><BR>
+            Choose the file: <input type="file" name="value"/><BR>
     </form> 
 
-<!--     <form action="/predict" method="post" enctype="multipart/form-data">
- -->    
-<form action = "/predict" method = "get"> 
+    <form action = "/predict" method = "get"> 
+        <select name="country">
+            <option value = 0>Select a Country... </option>
+            <option value = "India"> India </option>
+            <option value = "Mexico"> Mexico </option>
+            <option value = "Brazil"> Brazil </option>
+        </select>
+        <select name = "language">
+            <option value = 0> Choose a Language... </option>
+            <option value = "English"> English </option>
+            <option value = "Spanish"> Spanish </option>
+      </select>
+      <select name = "indismot">
+        <option value = 0>What would you like to see?</option>
+        <option value = "Incentives"> Incentives </option>
+        <option value = "Disincentives"> Disincentives </option>
+        <option value = "Motivations"> Motivations </option>
+      </select>
+    </form>
 
-    <select name="jumpmenu" onChange="jumpto(document.form2.jumpmenu.options[document.form2.jumpmenu.options.selectedIndex].value)">
-        <option>Brazil...</option>
-        <option value=1>Creates the state policy to support cooperatives within the state of sao paulo.pdf' </option>
-        <option value=2> Creating the Amazon Fund established by the National Bank for Economic and Social...pdf </option>
-        <option value=3>Creating the fund for agricultural, livestock, and fisheries development.pdf</option>
-        <option value=4>Creating the social fund for assistance to family farming within the espirto santo state.pdf</option>
-        <option value=5>Creating the social fund for assistance to family farming within the state of Espirito Santo.pdf</option>
-        <option value = 6> Creating the state fund to fight and er...pdf </option>
-        <option value = 7> Creating the state policy for agroecology and organic production (PEAPO).pdf</option>
-        <option value = 8> Decree instituting the Pacotuba Forestry Reserve.pdf</option> 
-        <option value = 9> Decree No. 7.390 regulating Law No. 12.187, instituting the National Policy...pdf </option>
-        <option value = 10> Ecologic-Economical Zoning of Brazil.pdf </option>
-        <option value = 11> Establishing procedures to regulate harvesting and marketing of exotic forest trees.pdf </option> 
-        <option value = 12> Establishing the crop insurance-fund for family farmers in minas gerais and...pdf </option>
-        <option value= 13> Establishing the Espirito Santo state policy on PEATER and PROATERES.pdf </option>
-        <option value = 14> Establishing the National System of Protected Areas Management - SNUC.pdf</option>
-        <option value = 15> Establishing the programme for the certification of agricultural, livestock...pdf</option>
-        <option value = 16> Establishing the state programme for sustainable rural development.pdf</option>
-        <option value = 17> Forest Code.pdf </option>
-        <option value = 18> Law No. 12.187 instituting the National Policy on Climate Change.pdf </option>
-        <option value = 19> Management of Public Forests, Brazilian Forest Service and National Fund...pdf </option>
-        <option value = 20> National Fund on Climate Change.pdf </option>
-        <option value = 21> National Water Resources Policy.pdf </option>
-        <option value = 22> On the use, conservation, and protection of agricultural land.pdf
-        </option>
-        <option value = 23> Providing for the development fund of Espirito Santo (FUNDES).pdf
-        </option>
-        <option value = 24> Providing for the state policy to support cooperatives within the state of minas gerais.pdf</option>
-        <option value = 25> Regulating the gradual elimination of the practive of burning sugar can straw.pdf</option>
-        <option value = 26> SNCR.pdf</option>
-        <option value = 27> Support Programmes for the Environmental Conservation and for the Promotion of...pdf</option>
-    </select><br>
- <select name="jumpmenu2" onChange="jumpto(document.form2.jumpmenu2.options[document.form2.jumpmenu2.options.selectedIndex].value)">
-        <option value= 0>India...</option>
-        <option value=1>_MineralConservationandDevelopmentRules1988-converted.pdf</option>
-        <option value = 2> 15. Wildlife (Protection) Act, 1972.pdf</option>
-        <option value=3>  Andhra Pradesh (Agricultural Produce and Livestock) Markets Rules, 1969.-converted.pdf</option>
-        <option value=4> andhyapradeshforest_act_1967.pdf</option>
-        <option value = 5> Biological Diversity Act 2002.pdf</option>
-        <option value = 6> CircularConcerningJointForestManagement1981.pdf</option>
-        <option value=7> CoconutDevelopmentBoardAct1979.pdf</option>
-        <option value=8> ForestConservationAct1980.pdf</option>
-        <option value=9> IndianForestAct1927.pdf</option>
-        <option value=10> MadhyaPradeshAct1999.pdf</option>
-        <option value=11> MineralConcessionRules1960.pdf</option>
-        <option value= 12> NationalGreenTribunalAct2010.pdf</option>
-        <option value=13> NationalMissionforaGreenIndia2014.pdf</option>
-        <option value=14> ProtectionofPlantVarietiesandFarmersRightsAct2001.pdf</option>
-        <option value=15> State Action Plan_Andhra-pradesh_2012.pdf</option>
-        <option value=16> State Action Plan_Madhya-Pradesh_2014.pdf</option>
-        <option value=17> THE COMPENSATORY AFFORESTATION FUND ACT, 2016.pdf</option>
-        <option value=18> THE ENVIRONMENT (PROTECTION) ACT, 1986.pdf</option>
-        <option value=19> THE SCHEDULED TRIBES AND OTHER TRADITIONAL FOREST </option>
-        <option value= 20> DWELLERS (RECOGNITION OF FOREST RIGHTS) ACT, 2006.pdf</option>
-        <option value=21> WetlandRules2010.pdf</option>
-    </select></br>
+    <!-- Predict: <input type="submit" name="button"/> -->
+    <a href="predict.html"><button type="button">Predict</button></a>
 
-    <select name="jumpmenu3" onChange="jumpto(document.form2.jumpmenu3.options[document.form2.jumpmenu3.options.selectedIndex].value)">
-        <option>Mexico...</option>
-    <option value=1> Agreement through which reference costs are issued for reforestation or ...pdf</option>
-    <option value=2> Cadastre Law for the State of Chiapas.pdf</option>
-    <option value=3> Cadastre Law of the State of Quintana Roo.pdf</option>
-    <option value=4> Conservation and Restoration of Forest Ecosystems Program.pdf</option>
-    <option value=5> Environmental Law For the State of Chiapas.pdf</option>
-    <option value=6> Federal Law of Special Economic Zones.pdf</option>
-    <option value=7> Forest Law of the State of Quintana Roo.pdf</option>
-    <option value=8> General Law of Ecological Balance and Environmental Protection.pdf</option>
-    <option value=9> General Law of Human Settlements, Territorial Planning....pdf</option>
-    <option value = 10> General Law of Sustainable Forest Development.pdf</option>
-    <option value=11> Guidelines for the granting of subsidies, designed to promote forest development.pdf</option>
-    <option value=12> Law for Adaptation and Mitigation of Climate Change in the State of Chiapas.pdf</option>
-    <option value=13> Law for Development of the Competitiveness of Micro, Small and Medium Enterprises.pdf</option>
-    <option value=14> Law of Burning and Prevention of Forest Fires for the State of Quintana Roo.pdf</option>
-    <option value= 15> Law of Sustainable Rural Cities for the State of Chiapas.pdf</option>
-    <option value=16> Law of Sustainable Rural Development of the State of Chiapas.pdf</option>
-    <option value=17> Law of Sustainable Rural Development.pdf</option>
-    <option value=18> Law on climate change action in the State of Quintana Roo.pdf</option>
-    <option value= 19> Mexico Forestry Law.pdf</option>
-    <option value=20> National Forestry Program 2016.pdf</option>
-    <option value=21> Program for Forest Development.pdf</option>
-    <option value=22> Program for the Development of Commercial Forest Plantations.pdf</option>
-    <option value=23> Regulation of the Cadastre Law of the State of Quintana Roo.pdf</option>
-    <option value=24> Specifications to mitigate the adverse effects on biodiversity caused by the change ...pdf</option>
-    <option value=25> Sustainable Forestry Development Law for the State of Chiapas (Decree No. 256).pdf</option>
-    </select>
-    </BR>
+</div><!-- 
 
-    Predict: <input type="submit" name="button"/>
-    </form> 
-    <!-- <a href="predict.html"><button type="button">Predict</button></a> -->
-  
-
-</div>
-
-
-
-
-
-
-
-
-
-
+    <form action="/handleUpload" method="post" enctype="multipart/form-data">
+            Choose the file: <input type="file" name="jumpmenu"/><BR> -->
 
 <div id="new documents">
   <h2>Storing New Documents</h2>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 1738f4a654870599ba75c2222745f2d958ac7886
 <!-- 
   <form action = "/handleUploadUrl", method = "post", enctype = "multipart/form-data">
         URL: <input type="text" name="url" ><br>
         <input type = "submit" value="Upload">
   </form>
  -->
-<<<<<<< HEAD
-=======
-
-<!--   <form action = "/handleUploadUrl", method = "post", enctype = "multipart/form-data">
-        URL: <input type="text" name="url" ><br>
-        <input type = "submit" value="Upload">
-  </form> -->
-
->>>>>>> e6e34c4046ceac8431ca2b5eb99f127b741cc725
-=======
->>>>>>> 1738f4a654870599ba75c2222745f2d958ac7886
   Country: 
     <select>
       <option value="item0">--Select a Country--</option>
@@ -241,7 +175,6 @@
   <form action="/handleUpload" method="post" enctype="multipart/form-data">
             Choose the file: <input type="file" name="file"/><BR>
                 <input type="submit" value="Upload"/>
-        </form> 
 </form>
 
 <div class="footer">
