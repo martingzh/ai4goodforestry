@@ -1,4 +1,0 @@
-import OCR_pipeline
-import storage
-
-OCR_pipeline.extractTextFromPaper("sample data/Kenya/AgricultureFisheriesandFoodAuthorityNo13of2013.PDF")
