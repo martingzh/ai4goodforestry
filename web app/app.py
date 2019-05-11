@@ -33,20 +33,18 @@ def handleFileUpload():
             file.save(os.path.join(UPLOAD_FOLDER, file.filename))
     return file.filename + " successfully uploaded"
 
-@app.route("/predict", methods=['POST'])
+@app.route("/predict", methods=['GET'])
 def predictInDis():
-    if request.method == "GET":            
-        tvalue = request.form['selectCountryClass']
-        if tvalue == "India":
-            classify_india = True
-            classify_mexico = False
+    #Get docId from home.html
+    #get corresponding document       
+    country = request.args.get('country')
+    language = request.form.get('language')
+    indismot = request.form.get('indismot')
 
-        else:
-            classify_india = False
-            classify_mexico = True
-        document = request.form['form2']
-    results = Classify(document,classify_india,classify_mexico)
-    return "classification done!" 
+    print(country, language, indismot)
+
+    # answer = Classify(document,classify_india,classify_mexico,is_incentive,is_disincentive,is_motivation)
+    return "answer"
 
 @app.route('/getall')
 def getall():
